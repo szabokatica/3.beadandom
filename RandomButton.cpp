@@ -6,7 +6,7 @@ using namespace genv;
 RandomButton::RandomButton(GameMaster* _parent, int _posx, int _posy)
         : PushButton(_posx, _posy), parent(_parent)
 {
-    szin_g = 0;
+    szin_b = 0;
     playernumber = 0;
 
 
@@ -43,7 +43,7 @@ void RandomButton:: valtozik(event en)
     if(playernumber == 1)
     {
         szin_r = 0;
-        szin_b = 255;
+        szin_g = 255;
     }
     else
     {

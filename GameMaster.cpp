@@ -8,7 +8,11 @@ using namespace genv;
 
 GameMaster::GameMaster()
 {
-    kijon = false;
+    kijon = true;
+    gyozott = false;
+    nyertes = 0;
+    db = 0;
+    i = 0;
     w = vector<vector<Widget *>>(palyameret,vector<Widget *>(palyameret,nullptr));
     for(unsigned int i = 0; i < palyameret; i++)
     {
@@ -60,8 +64,98 @@ void GameMaster:: event_loop()
                         w[fokuszx][fokuszy]->rajzol(ev);
                         if(ev.button == btn_left)
                             kijon = !kijon;
+                        db = 1;
+                        i = 1;
+
+                        while(w[fokuszx-i][fokuszy]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        i = 1;
+                        while(w[fokuszx+i][fokuszy]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        if(db >= 5)
+                        {
+                            gyozott = true;
+                            nyertes = w[fokuszx][fokuszy]->get_playernumber();
+                        }
+                        db = 1;
+                        i = 1;
+
+                        while(w[fokuszx][fokuszy-i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        i = 1;
+                        while(w[fokuszx][fokuszy+i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        if(db >= 5)
+                        {
+                            gyozott = true;
+                            nyertes = w[fokuszx][fokuszy]->get_playernumber();
+                        }
+                        db = 1;
+                        i = 1;
+
+                        while(w[fokuszx-i][fokuszy+i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        i = 1;
+                        while(w[fokuszx+i][fokuszy-i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        if(db >= 5)
+                        {
+                            gyozott = true;
+                            nyertes = w[fokuszx][fokuszy]->get_playernumber();
+                        }
+                        db = 1;
+                        i = 1;
+
+                        while(w[fokuszx-i][fokuszy-i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        i = 1;
+                        while(w[fokuszx+i][fokuszy+i]->get_playernumber()
+                              == w[fokuszx][fokuszy]->get_playernumber())
+                        {
+                            db++;
+                            i++;
+                        }
+                        if(db >= 5)
+                        {
+                            gyozott = true;
+                            nyertes = w[fokuszx][fokuszy]->get_playernumber();
+                        }
+
                     }
 
+            }
+            if(gyozott)
+            {
+                cout << nyertes << endl;
+                break;
             }
             for(unsigned int i = 0; i < w.size(); i++)
             {
