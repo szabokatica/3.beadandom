@@ -8,12 +8,14 @@
 class GameMaster
 {
 protected:
-    std::vector<Widget*> w;
+    std::vector<std::vector<Widget *> > w;
     Drawer* palya = new Drawer();
+    bool kijon, gyozott;
 public:
    // virtual void esemeny(std::string mitortent){}
     GameMaster();
     void event_loop();
+    bool get_kijon();
 };
 
 #endif // GAMEMASTER_HPP_INCLUDED

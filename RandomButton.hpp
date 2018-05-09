@@ -8,14 +8,15 @@
 class RandomButton : public PushButton
 {
 protected:
-    int oszlop, sor;
-    int playernumber, szin_r, szin_g, szin_b;
+    GameMaster* parent;
+    int szin_r, szin_g, szin_b;
 public:
-    RandomButton(int _posx, int _posy, int _sor, int _oszlop);
+    RandomButton(GameMaster* _parent, int _posx, int _posy);
     virtual void rajzol(genv::event ev) const;
     virtual void valtozik(genv::event ev);
     virtual void valasztos(event ev);
     bool onmouse(int, int) const;
+    virtual int get_playernumber();
     virtual void set_ujjatek();
 };
 

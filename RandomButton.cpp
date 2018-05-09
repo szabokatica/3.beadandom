@@ -3,10 +3,43 @@
 using namespace std;
 using namespace genv;
 
-RandomButton::RandomButton(int _posx, int _posy, int _sor, int _oszlop)
-        : PushButton(_posx, _posy), oszlop(_oszlop), sor(_sor)
+RandomButton::RandomButton(GameMaster* _parent, int _posx, int _posy)
+        : PushButton(_posx, _posy), parent(_parent)
 {
     szin_g = 0;
+    playernumber = 0;
+
+
+}
+bool RandomButton:: onmouse(int x, int y) const
+{
+    return x> posx && x < posx+racstav && y > posy&& y < posy+racstav;
+}
+int RandomButton::get_playernumber()
+{
+    return playernumber;
+}
+void RandomButton:: valasztos(event en)
+{
+    if(en.button == btn_left && onmouse(en.pos_x, en.pos_y))
+    {
+        valasztva = true;
+    }
+    else
+        valasztva = false;
+}
+
+void RandomButton:: rajzol(event en) const
+{
+        gout << move_to(posx+beljebb, posy+beljebb) << color(szin_r, szin_g, szin_b)
+        << box(negyzetmeret, negyzetmeret);
+}
+void RandomButton:: valtozik(event en)
+{
+    if(parent->get_kijon())
+        playernumber = 1;
+    else
+        playernumber = 2;
     if(playernumber == 1)
     {
         szin_r = 0;
@@ -17,32 +50,6 @@ RandomButton::RandomButton(int _posx, int _posy, int _sor, int _oszlop)
         szin_r = 255;
         szin_b = 0;
     }
-
-}
-bool RandomButton:: onmouse(int x, int y) const
-{
-    return x> posx && x < posx+racstav && y > posy&& y < posy+racstav;
-}
-
-void RandomButton:: valasztos(event en)
-{
-    if(en.button == btn_left && onmouse(en.pos_x, en.pos_y))
-    {
-        valasztva = true;
-    }
-}
-
-void RandomButton:: rajzol(event en) const
-{
-    if(valasztva)
-    {
-        gout << move_to(posx+beljebb, posy+beljebb) << color(szin_r, szin_g, szin_b)
-        << box(negyzetmeret, negyzetmeret);
-    }
-}
-void RandomButton:: valtozik(event en)
-{
-
 }
 void RandomButton:: set_ujjatek()
 {

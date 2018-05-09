@@ -12,7 +12,10 @@ Drawer:: ~Drawer()
 {
 
 }
+int Drawer::get_playernumber()
+{
 
+}
 void Drawer:: ablak() const
 {
     gout.open(XX,YY);

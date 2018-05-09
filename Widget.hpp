@@ -19,7 +19,7 @@ const int keret = 1;
 class Widget
 {
 protected:
-    int posx, posy;
+    int posx, posy, playernumber;
     bool valasztva, telitalalat;
 public:
     Widget(int _posx, int _posy);
@@ -30,6 +30,7 @@ public:
     virtual void valasztos(genv:: event ev) = 0;
     virtual bool onmouse(int, int) const = 0;
     bool get_valasztva() const;
+    virtual int get_playernumber() = 0;
 };
 
 #endif // WIDGET_HPP_INCLUDED

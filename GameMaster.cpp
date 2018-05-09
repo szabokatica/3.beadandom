@@ -1,63 +1,75 @@
 #include "GameMaster.hpp"
 #include "RandomButton.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace genv;
 
 GameMaster::GameMaster()
 {
+    kijon = false;
+    w = vector<vector<Widget *>>(palyameret,vector<Widget *>(palyameret,nullptr));
     for(unsigned int i = 0; i < palyameret; i++)
     {
         for(unsigned int j = 0; j < palyameret; j++)
         {
-            w.push_back(new RandomButton(honnanx+i*racstav, honnany+j*racstav, i, j));
+            w[i][j] = new RandomButton(this, honnanx+i*racstav, honnany+j*racstav);
         }
     }
 }
-
+bool GameMaster::get_kijon()
+{
+    return kijon;
+}
 void GameMaster:: event_loop()
 {
-    int fokusz = -1;
+    int fokuszx = -1;
+    int fokuszy = -1;
     event ev;
-    cout << "haho" << endl;
     palya->ablak();
     while(gin >> ev && ev.keycode != key_escape)
     {
         palya->palyarajz();
-//        for(Widget * wid : w)
-//        {
-//            wid -> rajzol(ev);
-//        }
         if(ev.button == btn_left) {
             for(unsigned int i = 0; i < w.size(); i++)
             {
-                w[i]->valasztos(ev);
+                for(unsigned int j = 0; j < w[i].size(); j++)
+                {
+                    w[i][j]->valasztos(ev);
+                }
             }
         }
         for(unsigned int i = 0; i < w.size(); i++)
         {
-            if(w[i]->get_valasztva())
+            for(unsigned int j = 0; j < w[i].size(); j++)
+            {
+                if(w[i][j]->get_valasztva())
                 {
-                    fokusz = i;
+                    fokuszx = i;
+                    fokuszy = j;
                 }
+            }
+
         }
-        if(fokusz != -1)
+        if(fokuszx != -1 && fokuszy != -1)
             {
-                w[fokusz]->valtozik(ev);
-                w[fokusz]->rajzol(ev);
+                if(w[fokuszx][fokuszy]->get_playernumber()==0)
+                    {
+                        w[fokuszx][fokuszy]->valtozik(ev);
+                        w[fokuszx][fokuszy]->rajzol(ev);
+                        if(ev.button == btn_left)
+                            kijon = !kijon;
+                    }
+
             }
-        for(Widget * wid : w)
+            for(unsigned int i = 0; i < w.size(); i++)
             {
-                wid -> rajzol(ev);
+                for(unsigned int j = 0; j < w[i].size(); j++)
+                {
+                    w[i][j] -> rajzol(ev);
+                }
             }
-//        if(ev.keycode == key_enter)
-//        {
-//            for(unsigned int i = 0; i < w.size(); i++)
-//            {
-//                w[i]->set_ujjatek();
-//            }
-//        }
         gout << refresh;
     }
 }
