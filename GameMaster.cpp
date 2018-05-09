@@ -26,6 +26,10 @@ bool GameMaster::get_kijon()
 {
     return kijon;
 }
+//int get_nyertes()
+//{
+//    return nyertes;
+//}
 void GameMaster:: event_loop()
 {
     int fokuszx = -1;
@@ -67,18 +71,20 @@ void GameMaster:: event_loop()
                         db = 1;
                         i = 1;
 
-                        while(w[fokuszx-i][fokuszy]->get_playernumber()
+                        while(fokuszx-i >= 0 && w[fokuszx-i][fokuszy]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                           // if(i < 20)
+                                i++;
                         }
                         i = 1;
-                        while(w[fokuszx+i][fokuszy]->get_playernumber()
+                        while(fokuszx + i < 20 && w[fokuszx+i][fokuszy]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                           // if(i < 20)
+                                i++;
                         }
                         if(db >= 5)
                         {
@@ -88,18 +94,20 @@ void GameMaster:: event_loop()
                         db = 1;
                         i = 1;
 
-                        while(w[fokuszx][fokuszy-i]->get_playernumber()
+                        while(fokuszy-i >= 0 && w[fokuszx][fokuszy-i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                            //if(i < 20)
+                                i++;
                         }
                         i = 1;
-                        while(w[fokuszx][fokuszy+i]->get_playernumber()
+                        while(fokuszy+i < 20 && w[fokuszx][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                           // if(i < 20)
+                                i++;
                         }
                         if(db >= 5)
                         {
@@ -109,18 +117,20 @@ void GameMaster:: event_loop()
                         db = 1;
                         i = 1;
 
-                        while(w[fokuszx-i][fokuszy+i]->get_playernumber()
+                        while(fokuszx-i >= 0 && fokuszy+i < 20 && w[fokuszx-i][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                            //if(i < 20)
+                                i++;
                         }
                         i = 1;
-                        while(w[fokuszx+i][fokuszy-i]->get_playernumber()
+                        while(fokuszx+i < 20 && fokuszy-i >= 0 && w[fokuszx+i][fokuszy-i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                            //if(i < 20)
+                                i++;
                         }
                         if(db >= 5)
                         {
@@ -130,14 +140,15 @@ void GameMaster:: event_loop()
                         db = 1;
                         i = 1;
 
-                        while(w[fokuszx-i][fokuszy-i]->get_playernumber()
+                        while(fokuszx-i >= 0 && fokuszy-i >= 0 &&w[fokuszx-i][fokuszy-i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            i++;
+                          //  if(i < 20)
+                                i++;
                         }
                         i = 1;
-                        while(w[fokuszx+i][fokuszy+i]->get_playernumber()
+                        while(fokuszx+i < 20 && fokuszy+i < 20 && w[fokuszx+i][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;

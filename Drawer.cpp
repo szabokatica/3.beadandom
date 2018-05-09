@@ -33,6 +33,10 @@ void Drawer:: palyarajz() const
         gout << move_to(honnanx, honnany+i*racstav) << line_to(honnanx+racstav*palyameret, honnany+i*racstav);
     }
 }
+//void Drawer:: mindennek_vege()
+//{
+//
+//}
 void Drawer:: rajzol(event ev) const{}
 void Drawer:: valtozik(event ev){}
 bool Drawer:: get_valasztva() const
