@@ -32,11 +32,12 @@ void Drawer:: palyarajz() const
     {
         gout << move_to(honnanx, honnany+i*racstav) << line_to(honnanx+racstav*palyameret, honnany+i*racstav);
     }
+    gout << move_to(50, 50) << color(0,255,0) << text("Player 1    ") << color(255,0,0) << text("Player 2");
 }
-//void Drawer:: mindennek_vege()
-//{
-//
-//}
+void Drawer:: mindennek_vege(string gyoz) const
+{
+    gout << move_to(250, 50) << color(64,128,128) << text("Player ") << text(gyoz) << text(" win!");
+}
 void Drawer:: rajzol(event ev) const{}
 void Drawer:: valtozik(event ev){}
 bool Drawer:: get_valasztva() const

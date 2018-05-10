@@ -158,15 +158,11 @@ void GameMaster:: event_loop()
                         {
                             gyozott = true;
                             nyertes = w[fokuszx][fokuszy]->get_playernumber();
+                            s = nyertes;
                         }
 
                     }
 
-            }
-            if(gyozott)
-            {
-                cout << nyertes << endl;
-                break;
             }
             for(unsigned int i = 0; i < w.size(); i++)
             {
@@ -175,6 +171,17 @@ void GameMaster:: event_loop()
                     w[i][j] -> rajzol(ev);
                 }
             }
+            if(gyozott)
+            {
+                palya->mindennek_vege(s);
+                break;
+            }
         gout << refresh;
+    }
+    while(gin >> ev && ev.keycode != key_escape)
+    {
+        if(ev.keycode == key_enter)
+            event_loop();
+            gout << refresh;
     }
 }
