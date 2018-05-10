@@ -9,7 +9,6 @@ class GameMaster
 {
 protected:
     std::vector<std::vector<Widget *> > w;
-    std::string s = "";
     Drawer* palya = new Drawer();
     bool kijon, gyozott;
     int nyertes, db, i;

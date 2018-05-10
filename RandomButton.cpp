@@ -51,6 +51,12 @@ void RandomButton:: valtozik(event en)
         szin_b = 0;
     }
 }
+void RandomButton::reset_playernumber()
+{
+    playernumber = 0;
+    szin_r = 0;
+    szin_g = 0;
+}
 void RandomButton:: set_ujjatek()
 {
     valasztva = false;

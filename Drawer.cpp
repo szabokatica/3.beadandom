@@ -1,5 +1,6 @@
 #include "Widget.hpp"
 #include "Drawer.hpp"
+#include <iostream>
 
 using namespace genv;
 using namespace std;
@@ -12,6 +13,7 @@ Drawer:: ~Drawer()
 {
 
 }
+void Drawer:: reset_playernumber(){}
 int Drawer::get_playernumber()
 {
 
@@ -34,9 +36,12 @@ void Drawer:: palyarajz() const
     }
     gout << move_to(50, 50) << color(0,255,0) << text("Player 1    ") << color(255,0,0) << text("Player 2");
 }
-void Drawer:: mindennek_vege(string gyoz) const
+void Drawer:: mindennek_vege(int gyoz) const
 {
-    gout << move_to(250, 50) << color(64,128,128) << text("Player ") << text(gyoz) << text(" win!");
+    if(gyoz == 1)
+        gout << move_to(250, 50) << color(64,128,128) << text("Player 1 win!");
+    else
+        gout << move_to(250, 50) << color(64,128,128) << text("Player 2 win!");
 }
 void Drawer:: rajzol(event ev) const{}
 void Drawer:: valtozik(event ev){}

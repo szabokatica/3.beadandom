@@ -26,16 +26,22 @@ bool GameMaster::get_kijon()
 {
     return kijon;
 }
-//int get_nyertes()
-//{
-//    return nyertes;
-//}
 void GameMaster:: event_loop()
 {
+    gyozott = false;
     int fokuszx = -1;
     int fokuszy = -1;
     event ev;
     palya->ablak();
+    for(unsigned int i = 0; i < w.size(); i++)
+    {
+        for(unsigned int j = 0; j < w[i].size(); j++)
+        {
+            w[i][j]->reset_playernumber();
+            w[i][j]->rajzol(ev);
+        }
+    }
+    palya->palyarajz();
     while(gin >> ev && ev.keycode != key_escape)
     {
         palya->palyarajz();
@@ -45,6 +51,7 @@ void GameMaster:: event_loop()
                 for(unsigned int j = 0; j < w[i].size(); j++)
                 {
                     w[i][j]->valasztos(ev);
+                   // w[i][j]->
                 }
             }
         }
@@ -58,7 +65,6 @@ void GameMaster:: event_loop()
                     fokuszy = j;
                 }
             }
-
         }
         if(fokuszx != -1 && fokuszy != -1)
             {
@@ -75,16 +81,14 @@ void GameMaster:: event_loop()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                           // if(i < 20)
-                                i++;
+                            i++;
                         }
                         i = 1;
                         while(fokuszx + i < 20 && w[fokuszx+i][fokuszy]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                           // if(i < 20)
-                                i++;
+                            i++;
                         }
                         if(db >= 5)
                         {
@@ -98,16 +102,14 @@ void GameMaster:: event_loop()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            //if(i < 20)
-                                i++;
+                            i++;
                         }
                         i = 1;
                         while(fokuszy+i < 20 && w[fokuszx][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                           // if(i < 20)
-                                i++;
+                            i++;
                         }
                         if(db >= 5)
                         {
@@ -121,16 +123,14 @@ void GameMaster:: event_loop()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            //if(i < 20)
-                                i++;
+                            i++;
                         }
                         i = 1;
                         while(fokuszx+i < 20 && fokuszy-i >= 0 && w[fokuszx+i][fokuszy-i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                            //if(i < 20)
-                                i++;
+                            i++;
                         }
                         if(db >= 5)
                         {
@@ -144,8 +144,7 @@ void GameMaster:: event_loop()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
-                          //  if(i < 20)
-                                i++;
+                            i++;
                         }
                         i = 1;
                         while(fokuszx+i < 20 && fokuszy+i < 20 && w[fokuszx+i][fokuszy+i]->get_playernumber()
@@ -158,11 +157,8 @@ void GameMaster:: event_loop()
                         {
                             gyozott = true;
                             nyertes = w[fokuszx][fokuszy]->get_playernumber();
-                            s = nyertes;
                         }
-
                     }
-
             }
             for(unsigned int i = 0; i < w.size(); i++)
             {
@@ -173,15 +169,21 @@ void GameMaster:: event_loop()
             }
             if(gyozott)
             {
-                palya->mindennek_vege(s);
+                palya->mindennek_vege(nyertes);
                 break;
             }
         gout << refresh;
     }
-    while(gin >> ev && ev.keycode != key_escape)
+    while(gin >> ev)
     {
         if(ev.keycode == key_enter)
-            event_loop();
-            gout << refresh;
+            {
+
+                event_loop();
+                break;
+            }
+        if(ev.keycode == key_escape)
+            return;
+        gout << refresh;
     }
 }
