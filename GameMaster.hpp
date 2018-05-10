@@ -11,11 +11,12 @@ protected:
     std::vector<std::vector<Widget *> > w;
     Drawer* palya = new Drawer();
     bool kijon, gyozott;
-    int nyertes, db, i;
+    int nyertes, db, i, tele;
 public:
    // virtual void esemeny(std::string mitortent){}
     GameMaster();
     //int get_nyertes();
+    int mennyi();
     void event_loop();
     bool get_kijon();
 };

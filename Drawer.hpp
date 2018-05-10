@@ -10,6 +10,7 @@ public:
     ~Drawer();
     void ablak() const;
     void palyarajz() const;
+    void dontetlen() const;
     void mindennek_vege(int) const;
     virtual int get_playernumber();
     virtual void rajzol(genv:: event ev) const;
@@ -17,6 +18,7 @@ public:
     virtual void valasztos(genv:: event ev);
     virtual bool onmouse(int, int) const;
     virtual void reset_playernumber();
+    virtual void set_valasztva();
     virtual bool get_valasztva() const;
 };
 

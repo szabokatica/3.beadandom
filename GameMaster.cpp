@@ -11,6 +11,7 @@ GameMaster::GameMaster()
     kijon = true;
     gyozott = false;
     nyertes = 0;
+    tele = 0;
     db = 0;
     i = 0;
     w = vector<vector<Widget *>>(palyameret,vector<Widget *>(palyameret,nullptr));
@@ -42,8 +43,10 @@ void GameMaster:: event_loop()
         }
     }
     palya->palyarajz();
-    while(gin >> ev && ev.keycode != key_escape)
+    while(gin >> ev)
     {
+        if(ev.keycode == key_escape)
+            return;
         palya->palyarajz();
         if(ev.button == btn_left) {
             for(unsigned int i = 0; i < w.size(); i++)
@@ -51,7 +54,6 @@ void GameMaster:: event_loop()
                 for(unsigned int j = 0; j < w[i].size(); j++)
                 {
                     w[i][j]->valasztos(ev);
-                   // w[i][j]->
                 }
             }
         }
@@ -84,7 +86,7 @@ void GameMaster:: event_loop()
                             i++;
                         }
                         i = 1;
-                        while(fokuszx + i < 20 && w[fokuszx+i][fokuszy]->get_playernumber()
+                        while(fokuszx + i < palyameret && w[fokuszx+i][fokuszy]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
@@ -105,7 +107,7 @@ void GameMaster:: event_loop()
                             i++;
                         }
                         i = 1;
-                        while(fokuszy+i < 20 && w[fokuszx][fokuszy+i]->get_playernumber()
+                        while(fokuszy+i < palyameret && w[fokuszx][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
@@ -119,14 +121,14 @@ void GameMaster:: event_loop()
                         db = 1;
                         i = 1;
 
-                        while(fokuszx-i >= 0 && fokuszy+i < 20 && w[fokuszx-i][fokuszy+i]->get_playernumber()
+                        while(fokuszx-i >= 0 && fokuszy+i < palyameret && w[fokuszx-i][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
                             i++;
                         }
                         i = 1;
-                        while(fokuszx+i < 20 && fokuszy-i >= 0 && w[fokuszx+i][fokuszy-i]->get_playernumber()
+                        while(fokuszx+i < palyameret && fokuszy-i >= 0 && w[fokuszx+i][fokuszy-i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
@@ -147,7 +149,7 @@ void GameMaster:: event_loop()
                             i++;
                         }
                         i = 1;
-                        while(fokuszx+i < 20 && fokuszy+i < 20 && w[fokuszx+i][fokuszy+i]->get_playernumber()
+                        while(fokuszx+i < palyameret && fokuszy+i < palyameret && w[fokuszx+i][fokuszy+i]->get_playernumber()
                               == w[fokuszx][fokuszy]->get_playernumber())
                         {
                             db++;
@@ -167,9 +169,16 @@ void GameMaster:: event_loop()
                     w[i][j] -> rajzol(ev);
                 }
             }
+//            if(mennyi() == palyameret*palyameret)
+//            {
+//                tele = 0;
+//                palya->dontetlen();
+//                break;
+//            }
             if(gyozott)
             {
                 palya->mindennek_vege(nyertes);
+                w[fokuszx][fokuszy]->set_valasztva();
                 break;
             }
         gout << refresh;
@@ -178,7 +187,6 @@ void GameMaster:: event_loop()
     {
         if(ev.keycode == key_enter)
             {
-
                 event_loop();
                 break;
             }
@@ -186,4 +194,16 @@ void GameMaster:: event_loop()
             return;
         gout << refresh;
     }
+}
+int GameMaster:: mennyi()
+{
+    for(unsigned int i = 0; i < w.size(); i++)
+    {
+        for(unsigned int j = 0; j < w[i].size(); j++)
+        {
+            if(w[i][j] -> get_playernumber() != 0)
+                tele++;
+        }
+    }
+    return tele;
 }

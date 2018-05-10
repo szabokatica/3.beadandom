@@ -18,6 +18,7 @@ public:
     bool onmouse(int, int) const;
     virtual int get_playernumber();
     virtual void reset_playernumber();
+    virtual void set_valasztva();
     virtual void set_ujjatek();
 };
 

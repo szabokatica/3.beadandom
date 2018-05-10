@@ -8,12 +8,14 @@ RandomButton::RandomButton(GameMaster* _parent, int _posx, int _posy)
 {
     szin_b = 0;
     playernumber = 0;
-
-
 }
 bool RandomButton:: onmouse(int x, int y) const
 {
     return x> posx && x < posx+racstav && y > posy&& y < posy+racstav;
+}
+void RandomButton:: set_valasztva()
+{
+    valasztva = false;
 }
 int RandomButton::get_playernumber()
 {
