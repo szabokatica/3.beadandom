@@ -10,8 +10,8 @@ public:
     ~Drawer();
     void ablak() const;
     void palyarajz() const;
-    void dontetlen() const;
     void mindennek_vege(int) const;
+    void halott_jatek() const;
     virtual int get_playernumber();
     virtual void rajzol(genv:: event ev) const;
     virtual void valtozik(genv:: event ev);

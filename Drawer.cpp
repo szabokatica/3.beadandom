@@ -19,11 +19,6 @@ int Drawer::get_playernumber()
 {
 
 }
-void Drawer:: dontetlen() const
-{
-    gout << move_to(250, 50) << color(64,128,128) << text("There is no winner!");
-    gout << move_to(250, 65) << color(64,128,128) << text("Press ENTER to start the new game!");
-}
 void Drawer:: ablak() const
 {
     gout.open(XX,YY);
@@ -45,10 +40,16 @@ void Drawer:: palyarajz() const
 void Drawer:: mindennek_vege(int gyoz) const
 {
     if(gyoz == 1)
-        gout << move_to(250, 50) << color(64,128,128) << text("Player 1 win!");
+        gout << move_to(250, 50) << color(0, 255, 255) << text("Player 1 win!");
     else
-        gout << move_to(250, 50) << color(64,128,128) << text("Player 2 win!");
-    gout << move_to(250, 65) << color(64,128,128) << text("Press ENTER to start the new game!");
+        gout << move_to(250, 50) << color(0, 255, 255) << text("Player 2 win!");
+    gout << move_to(250, 65) << text("New Game -> Press ENTER");
+}
+void Drawer:: halott_jatek() const
+{
+    gout << move_to(250, 50) << color(0, 255, 255) << text("There is no winner!")
+         << move_to(250, 65) << text("New Game -> Press ENTER");
+
 }
 void Drawer:: rajzol(event ev) const{}
 void Drawer:: valtozik(event ev){}

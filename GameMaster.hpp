@@ -16,7 +16,6 @@ public:
    // virtual void esemeny(std::string mitortent){}
     GameMaster();
     //int get_nyertes();
-    int mennyi();
     void event_loop();
     bool get_kijon();
 };

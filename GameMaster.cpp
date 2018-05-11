@@ -11,7 +11,7 @@ GameMaster::GameMaster()
     kijon = true;
     gyozott = false;
     nyertes = 0;
-    tele = 0;
+    tele= 0;
     db = 0;
     i = 0;
     w = vector<vector<Widget *>>(palyameret,vector<Widget *>(palyameret,nullptr));
@@ -54,6 +54,7 @@ void GameMaster:: event_loop()
                 for(unsigned int j = 0; j < w[i].size(); j++)
                 {
                     w[i][j]->valasztos(ev);
+                   // w[i][j]->
                 }
             }
         }
@@ -75,7 +76,10 @@ void GameMaster:: event_loop()
                         w[fokuszx][fokuszy]->valtozik(ev);
                         w[fokuszx][fokuszy]->rajzol(ev);
                         if(ev.button == btn_left)
+                        {
                             kijon = !kijon;
+                            tele++;
+                        }
                         db = 1;
                         i = 1;
 
@@ -169,15 +173,17 @@ void GameMaster:: event_loop()
                     w[i][j] -> rajzol(ev);
                 }
             }
-//            if(mennyi() == palyameret*palyameret)
-//            {
-//                tele = 0;
-//                palya->dontetlen();
-//                break;
-//            }
             if(gyozott)
             {
                 palya->mindennek_vege(nyertes);
+                w[fokuszx][fokuszy]->set_valasztva();
+                tele = 0;
+                break;
+            }
+            if(tele== palyameret*palyameret)
+            {
+                tele = 0;
+                palya->halott_jatek();
                 w[fokuszx][fokuszy]->set_valasztva();
                 break;
             }
@@ -187,6 +193,7 @@ void GameMaster:: event_loop()
     {
         if(ev.keycode == key_enter)
             {
+
                 event_loop();
                 break;
             }
@@ -194,16 +201,4 @@ void GameMaster:: event_loop()
             return;
         gout << refresh;
     }
-}
-int GameMaster:: mennyi()
-{
-    for(unsigned int i = 0; i < w.size(); i++)
-    {
-        for(unsigned int j = 0; j < w[i].size(); j++)
-        {
-            if(w[i][j] -> get_playernumber() != 0)
-                tele++;
-        }
-    }
-    return tele;
 }
