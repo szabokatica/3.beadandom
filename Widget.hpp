@@ -24,7 +24,7 @@ protected:
 public:
     Widget(int _posx, int _posy);
     Widget();
-    virtual ~Widget();
+   // virtual ~Widget();
     virtual void rajzol(genv:: event ev) const = 0;
     virtual void valtozik(genv:: event ev) = 0;
     virtual void valasztos(genv:: event ev) = 0;

@@ -5,14 +5,22 @@
 using namespace genv;
 using namespace std;
 
+const int tavolsag = 10;
+const int hossza = 10;
+const int x = 40;
+const int x2 = 140;
+const int y = 35;
+const int meret = 8;
+const int hanyszor = 2;
+
 Drawer::Drawer() : Widget()
 {
 }
 
-Drawer:: ~Drawer()
-{
-
-}
+//Drawer:: ~Drawer()
+//{
+//
+//}
 void Drawer:: reset_playernumber(){}
 void Drawer::set_valasztva(){}
 int Drawer::get_playernumber()
@@ -50,6 +58,22 @@ void Drawer:: halott_jatek() const
     gout << move_to(250, 50) << color(0, 255, 255) << text("There is no winner!")
          << move_to(250, 65) << text("New Game -> Press ENTER");
 
+}
+void Drawer::ki_jon(bool c) const
+{
+    gout << color(0,255,255);
+    if(c == 1)
+        {
+            gout << move_to(x,y) << line_to(x+hossza*meret, y)
+             << line_to(x+hossza*meret, y+hossza*hanyszor) << line_to(x, y+hossza*hanyszor)
+             << line_to(x, y);
+        }
+    else
+        {
+            gout << move_to(x2, y) << line_to(x2+hossza*meret, y)
+             << line_to(x2+hossza*meret, y+hossza*hanyszor)
+             << line_to(x2, y+hossza*hanyszor) << line_to(x2, y);
+        }
 }
 void Drawer:: rajzol(event ev) const{}
 void Drawer:: valtozik(event ev){}

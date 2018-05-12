@@ -77,9 +77,11 @@ void GameMaster:: event_loop()
                         w[fokuszx][fokuszy]->rajzol(ev);
                         if(ev.button == btn_left)
                         {
+
                             kijon = !kijon;
                             tele++;
                         }
+
                         db = 1;
                         i = 1;
 
@@ -171,6 +173,7 @@ void GameMaster:: event_loop()
                 for(unsigned int j = 0; j < w[i].size(); j++)
                 {
                     w[i][j] -> rajzol(ev);
+                    palya->ki_jon(kijon);
                 }
             }
             if(gyozott)

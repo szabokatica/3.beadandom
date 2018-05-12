@@ -3,7 +3,6 @@
 
 #include "Widget.hpp"
 #include "PushButton.hpp"
-#include "Player.hpp"
 
 class RandomButton : public PushButton
 {

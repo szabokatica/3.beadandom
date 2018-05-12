@@ -7,11 +7,12 @@ class Drawer : public Widget
 {
 public:
     Drawer();
-    ~Drawer();
+   // ~Drawer();
     void ablak() const;
     void palyarajz() const;
     void mindennek_vege(int) const;
     void halott_jatek() const;
+    void ki_jon(bool) const;
     virtual int get_playernumber();
     virtual void rajzol(genv:: event ev) const;
     virtual void valtozik(genv:: event ev);
