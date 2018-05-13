@@ -1,7 +1,6 @@
 #include "GameMaster.hpp"
 #include "RandomButton.hpp"
 #include <iostream>
-#include <vector>
 
 using namespace std;
 using namespace genv;
@@ -54,7 +53,6 @@ void GameMaster:: event_loop()
                 for(unsigned int j = 0; j < w[i].size(); j++)
                 {
                     w[i][j]->valasztos(ev);
-                   // w[i][j]->
                 }
             }
         }

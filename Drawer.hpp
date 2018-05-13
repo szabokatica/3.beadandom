@@ -7,7 +7,6 @@ class Drawer : public Widget
 {
 public:
     Drawer();
-   // ~Drawer();
     void ablak() const;
     void palyarajz() const;
     void mindennek_vege(int) const;

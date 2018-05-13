@@ -15,8 +15,6 @@ Widget::Widget()
 {
 }
 
-//Widget::~Widget() {}
-
 bool Widget:: get_valasztva() const
 {
     return valasztva;

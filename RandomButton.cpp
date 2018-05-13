@@ -1,8 +1,5 @@
 #include "RandomButton.hpp"
 
-using namespace std;
-using namespace genv;
-
 RandomButton::RandomButton(GameMaster* _parent, int _posx, int _posy)
         : PushButton(_posx, _posy), parent(_parent)
 {
@@ -11,7 +8,7 @@ RandomButton::RandomButton(GameMaster* _parent, int _posx, int _posy)
 }
 bool RandomButton:: onmouse(int x, int y) const
 {
-    return x> posx && x < posx+racstav && y > posy&& y < posy+racstav;
+    return x > posx && x < posx+racstav && y > posy && y < posy+racstav;
 }
 void RandomButton:: set_valasztva()
 {
@@ -33,8 +30,7 @@ void RandomButton:: valasztos(event en)
 
 void RandomButton:: rajzol(event en) const
 {
-        gout << move_to(posx+beljebb, posy+beljebb) << color(szin_r, szin_g, szin_b)
-        << box(negyzetmeret, negyzetmeret);
+        gout << move_to(posx+beljebb, posy+beljebb) << color(szin_r, szin_g, szin_b) << box(negyzetmeret, negyzetmeret);
 }
 void RandomButton:: valtozik(event en)
 {

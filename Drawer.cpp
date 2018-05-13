@@ -1,9 +1,7 @@
 #include "Widget.hpp"
 #include "Drawer.hpp"
-#include <iostream>
 
 using namespace genv;
-using namespace std;
 
 const int tavolsag = 10;
 const int hossza = 10;
@@ -15,17 +13,13 @@ const int hanyszor = 2;
 
 Drawer::Drawer() : Widget()
 {
-}
 
-//Drawer:: ~Drawer()
-//{
-//
-//}
+}
 void Drawer:: reset_playernumber(){}
 void Drawer::set_valasztva(){}
 int Drawer::get_playernumber()
 {
-
+    return 0;
 }
 void Drawer:: ablak() const
 {

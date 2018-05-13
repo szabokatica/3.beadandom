@@ -2,8 +2,6 @@
 #define PUSHBUTTON_HPP_INCLUDED
 
 #include "Widget.hpp"
-#include "GameMaster.hpp"
-//#include "Window.hpp"
 #include "graphics.hpp"
 
 using namespace std;
@@ -16,7 +14,7 @@ public:
     virtual void rajzol(event ev) const = 0;
     virtual void valtozik(event ev) = 0;
     virtual void valasztos(event ev) = 0;
-    bool onmouse(int, int) const;
+    bool onmouse(int, int) const = 0;
 };
 
 

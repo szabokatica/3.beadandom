@@ -13,9 +13,7 @@ protected:
     bool kijon, gyozott;
     int nyertes, db, i, tele;
 public:
-   // virtual void esemeny(std::string mitortent){}
     GameMaster();
-    //int get_nyertes();
     void event_loop();
     bool get_kijon();
 };
